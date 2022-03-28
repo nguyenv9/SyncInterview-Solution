@@ -67,6 +67,7 @@
      {
          recordsToLoad = 0;
      }
+     // Loading 3 default documents that will be consistent to test
      await sourceDb.insert({ name : 'GE', owner: 'test', amount: 1000000 });
      console.log('Loaded GE');
      await the.wait(300);
@@ -77,7 +78,7 @@
      console.log('Loaded Google');       
      TOTAL_RECORDS = 3;
      var i = 0;
-     for(i = 0; i < recordsToLoad ; i++)
+     for(i = 0; i < recordsToLoad ; i++) // using faker to create dummy documents
      {
         await sourceDb.insert({ name : faker.company.companyName(), owner: 'test' + i, amount: faker.datatype.number() });
         TOTAL_RECORDS += 1;
@@ -85,7 +86,10 @@
     return TOTAL_RECORDS;
  }
  
- const clearSourceDB = async () => {
+ /**
+  *  Function to clear the sourceDB for testing purposes.
+  */
+ const clearSourceDB = async () => { 
      await sourceDb.remove({}, { multi: true});
  }
  
